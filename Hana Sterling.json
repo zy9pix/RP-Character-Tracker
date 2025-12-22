@@ -1,0 +1,183 @@
+{
+  "id": "c4d3e2a1-9b8c-4d7e-a6f5-1b2c3d4e5f6g",
+  "name": "Hana Sterling",
+  "story": "Hana Sterling, Los Santos'un karmaşık kültürel dokusunda doğmuş, Doğu ve Batı sentezi bir ailenin tek çocuğudur. Annesi Akiko, Tokyo'dan uluslararası bir lojistik firmasının temsilcisi olarak şehre gelmiş, babası Robert ise İngiliz asıllı bir mimar olarak Los Santos'un yeniden yapılanma projelerinde çalışırken tanışmışlardır. Bu kozmopolit ev ortamı, Hana'nın küçük yaştan itibaren disiplinli ama açık fikirli bir birey olarak yetişmesini sağladı. Ancak Hana'nın çocukluğu, ailesinin yoğun iş temposu nedeniyle biraz yalnız geçti. Bu yalnızlığı, ilkokul yıllarında tanıştığı ve kendisi gibi içe dönük ama hayal gücü geniş olan Oliver ile doldurdu. İkili, okul çıkışlarında çizgi roman dükkanlarını gezerek, anime izleyerek ve kendi hayali dünyalarını kurgulayarak ayrılmaz bir bağ kurdular.\n\nLise yıllarında teknolojiye olan yatkınlığını keşfeden Hana, Los Santos'un karmaşasından uzaklaşıp kendini akademik olarak kanıtlamak istedi. San Fierro Üniversitesi'nde Yazılım Mühendisliği bölümünü kazandı ve şehri terk etti. Üniversite hayatı boyunca Oliver ile irtibatı hiç koparmadı; her tatilde bir araya gelip gelecek hayalleri kurdular. Mezuniyetinin hemen ardından San Fierro'daki 'Nebula Stream' adlı umut vadeden bir yapay zeka startup'ında Yazılım Geliştirici olarak işe başladı. Başlangıçta her şey rüya gibiydi; yüksek tempo, modern ofisler ve dünyayı değiştirme ideali. Ancak teknoloji sektörünün acımasız yüzüyle karşılaşması uzun sürmedi. İki yıllık yoğun çalışmanın ve uykusuz gecelerin ardından, yatırımcıların fonları çekmesiyle proje aniden iptal edildi ve Hana, büyük bir boşlukla işsiz kaldı.\n\nBu başarısızlık hissi ve büyük şehrin yabancılaşması, Hana'yı köklerine ve en güvenli limanı olan Oliver'a geri döndürdü. Los Santos'a dönüşü bir yenilgi değil, yeni bir başlangıç olarak görmeye çalışıyor. Yıllardır Oliver ile şakayla karışık konuştukları 'The Loot Drop' fikrini hayata geçirmek için artık hem zamanı hem de bir miktar birikimi var. Yazılım dünyasının soyutluğundan sıkılan Hana, artık insanlara dokunan, kahve kokusu ve sevdikleri figürlerle dolu somut bir mekan yaratmak istiyor. Şu anda hem işsizliğin getirdiği mali kaygılarla boğuşuyor hem de çocukluk arkadaşıyla giriştikleri bu riskli ticari maceranın heyecanını yaşıyor.",
+  "traits": {
+    "personality": [
+      "Analitik",
+      "Sadık",
+      "Mükemmeliyetçi",
+      "İçe dönük",
+      "Yaratıcı",
+      "Kaygılı"
+    ],
+    "physical": [
+      "Minyon",
+      "Çekik gözlü",
+      "Siyah saçlı",
+      "Soluk tenli",
+      "Gözlüklü"
+    ],
+    "behavior": [
+      "Dudağını ısırır",
+      "Hızlı konuşur",
+      "Not alır",
+      "Gözlerini kısar",
+      "Kahve tutkunu"
+    ]
+  },
+  "abilities": [
+    {
+      "id": "abl-001",
+      "name": "Full-Stack Yazılım",
+      "level": 8
+    },
+    {
+      "id": "abl-002",
+      "name": "Japonca Konuşma",
+      "level": 7
+    },
+    {
+      "id": "abl-003",
+      "name": "Barista Becerileri",
+      "level": 3
+    },
+    {
+      "id": "abl-004",
+      "name": "Pazarlık",
+      "level": 4
+    },
+    {
+      "id": "abl-005",
+      "name": "Hızlı Klavye Kullanımı",
+      "level": 9
+    }
+  ],
+  "diary": [
+    {
+      "id": "dry-003",
+      "title": "Büyük Gün Yaklaşıyor",
+      "content": "Yarın belediyeye gidip ruhsat işlerini soracağız. Babam biraz şüpheci yaklaşıyor, 'Mühendisliği bunun için mi okudun?' bakışlarını yakalıyorum ama annem destekliyor. Japonya'daki kuzenimden sınırlı üretim figür tedariği için söz aldım. Bu bizim farkımız olacak. Yarın 2 Aralık. Yeni hayatımın, kendi işimin ilk resmi adımlarını atacağım gün.",
+      "date": "2025-12-01",
+      "isAiGenerated": false,
+      "summary": "Kafe planının ciddileşmesi ve aile tepkileri."
+    },
+    {
+      "id": "dry-002",
+      "title": "Mekan Arayışı",
+      "content": "Bugün Oliver ile Little Seoul ve Vinewood taraflarını gezdik. Kiralar uçmuş! Oliver her zamanki gibi iyimser, 'Buralar gelişiyor Hana, tam zamanı' diyor. Onun bu enerjisine ihtiyacım var. Bir dükkan gördük, eskiden bir plakçıymış. Tozlu, bakımsız ama vitrini harika. Oraya figürleri dizdiğimi hayal ettim. Belki de arka tarafa küçük bir kodlama istasyonu kurarım? Hayır, odaklan Hana. Kahve ve Figür. Kodlama yok.",
+      "date": "2025-11-28",
+      "isAiGenerated": false,
+      "summary": "Oliver ile potansiyel dükkan yerlerine bakış."
+    },
+    {
+      "id": "dry-001",
+      "title": "Eve Dönüş ve Belirsizlik",
+      "content": "Uçak tekerlekleri LS pistine değdiğinde midemde garip bir düğüm hissettim. San Fierro'daki o cam kulelerden sonra burası hem çok tanıdık hem de çok kaotik. Annemler odamı olduğu gibi bırakmışlar, ama ben artık o odadan çıkan kız değilim. Nebula projesinin çöküşü hala canımı yakıyor. Kodlarımın çöp olması... Neyse, bunu düşünmemeliyim. Yarın Oliver ile buluşacağız. Telefondaki sesi heyecanlıydı. Gerçekten bu kafe işini yapabilir miyiz? Bilmiyorum ama denemek zorundayım.",
+      "date": "2025-11-20",
+      "isAiGenerated": false,
+      "summary": "Los Santos'a dönüşün ilk günü ve karmaşık duygular."
+    }
+  ],
+  "gtaInfo": {
+    "origin": "Los Santos",
+    "whyLS": "Kendi işini kurmak ve eve dönüş.",
+    "family": "Akiko (Anne), Robert (Baba)",
+    "accent": "Amerikan (Hafif İngiliz tonlamalarıyla)",
+    "catchphrases": "Mantıken bakarsak...",
+    "speechPattern": "Teknik terimleri günlük dile karıştırır, heyecanlanınca hızlanır.",
+    "phoneNumber": "555-0192",
+    "job": "İşsiz (Girişimci Adayı)",
+    "address": "Mirror Park, Ailesinin Evi",
+    "currentStatus": "Kafe projesi için lokasyon araştırıyor.",
+    "generalStatus": "Sivil"
+  },
+  "timelineEvents": [
+    {
+      "id": "ev-001",
+      "title": "Doğum",
+      "date": "2000-05-14",
+      "type": "personal",
+      "summary": "Hana Sterling, Los Santos General Hastanesi'nde doğdu."
+    },
+    {
+      "id": "ev-002",
+      "title": "Oliver ile Tanışma",
+      "date": "2006-09-10",
+      "type": "relationship",
+      "summary": "İlkokul birinci sınıfta, beslenme çantasındaki anime karakterini tanıyan Oliver ile arkadaş oldu."
+    },
+    {
+      "id": "ev-003",
+      "title": "İlk Bilgisayar",
+      "date": "2010-12-25",
+      "type": "personal",
+      "summary": "Babası ona Noel hediyesi olarak ilk kişisel bilgisayarını aldı, kodlamaya ilgi duymaya başladı."
+    },
+    {
+      "id": "ev-004",
+      "title": "Comic-Con Ziyareti",
+      "date": "2015-07-15",
+      "type": "personal",
+      "summary": "Oliver ile birlikte ilk kez San Diego Comic-Con'a katıldı, koleksiyonculuk tutkusu başladı."
+    },
+    {
+      "id": "ev-005",
+      "title": "San Fierro'ya Taşınma",
+      "date": "2018-08-20",
+      "type": "personal",
+      "summary": "Yazılım Mühendisliği eğitimi için Los Santos'tan ayrılıp San Fierro'ya yerleşti."
+    },
+    {
+      "id": "ev-006",
+      "title": "Üniversite Mezuniyeti",
+      "date": "2022-06-15",
+      "type": "personal",
+      "summary": "San Fierro Üniversitesi'nden onur derecesiyle mezun oldu."
+    },
+    {
+      "id": "ev-007",
+      "title": "Nebula Stream İşe Başlangıç",
+      "date": "2022-07-01",
+      "type": "business",
+      "summary": "Startup projesinde Junior Developer olarak işe başladı."
+    },
+    {
+      "id": "ev-008",
+      "title": "Terfi",
+      "date": "2024-01-10",
+      "type": "business",
+      "summary": "Gösterdiği başarı sayesinde proje lider yardımcılığına yükseldi."
+    },
+    {
+      "id": "ev-009",
+      "title": "Projenin İptali ve İşten Çıkarma",
+      "date": "2025-10-15",
+      "type": "business",
+      "summary": "Yatırımcıların çekilmesiyle şirket küçülmeye gitti, Hana işten çıkarıldı."
+    },
+    {
+      "id": "ev-010",
+      "title": "Los Santos'a Kesin Dönüş",
+      "date": "2025-11-20",
+      "type": "personal",
+      "summary": "San Fierro'daki dairesini kapatıp ailesinin yanına Los Santos'a döndü."
+    },
+    {
+      "id": "ev-011",
+      "title": "The Loot Drop Planı",
+      "date": "2025-11-22",
+      "type": "business",
+      "summary": "Oliver ile bir araya gelip 'The Loot Drop' kafesi için ilk ciddi iş planını taslağını çıkardılar."
+    },
+    {
+      "id": "ev-012",
+      "title": "Mevcut Gün",
+      "date": "2025-12-02",
+      "type": "personal",
+      "summary": "Belediyede ruhsat işlemleri ve dükkan kiralama süreci için hazırlık yapıyor."
+    }
+  ],
+  "gameType": "gta",
+  "createdAt": "2025-12-02T13:22:53.676Z"
+}
