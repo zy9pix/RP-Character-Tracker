@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useCharacterStore } from '@/lib/store/character-store'
 import { DiaryEntry } from '@/lib/types'
 import { Button, Input, Card, CardHeader, CardTitle, CardContent } from '@/components/ui/core'
@@ -13,7 +13,7 @@ import { toast } from "sonner"
 
 import { useSearchParams } from 'next/navigation'
 
-export default function DiaryPage() {
+function DiaryContent() {
     const { getActiveCharacter, addDiaryEntry, updateDiaryEntry, deleteDiaryEntry } = useCharacterStore()
     const activeChar = getActiveCharacter()
     const searchParams = useSearchParams()
@@ -257,5 +257,17 @@ export default function DiaryPage() {
                 )}
             </div>
         </div>
+    )
+}
+
+export default function DiaryPage() {
+    return (
+        <Suspense fallback={
+            <div className="h-[calc(100vh-8rem)] flex items-center justify-center">
+                <Loader2 className="w-8 h-8 animate-spin text-primary" />
+            </div>
+        }>
+            <DiaryContent />
+        </Suspense>
     )
 }

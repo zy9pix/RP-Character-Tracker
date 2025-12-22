@@ -5,11 +5,11 @@ import { TimelineView } from "@/components/timeline/timeline-view"
 import { CreateEventDialog } from "@/components/timeline/create-event-dialog"
 import { Button } from "@/components/ui/core"
 import { Card, CardContent } from "@/components/ui/core"
-import { Plus } from "lucide-react"
-import { useState, useEffect } from "react"
+import { Plus, Loader2 } from "lucide-react"
+import { useState, useEffect, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 
-export default function TimelinePage() {
+function TimelineContent() {
     const { getActiveCharacter } = useCharacterStore()
     const activeChar = getActiveCharacter()
     const searchParams = useSearchParams()
@@ -70,5 +70,17 @@ export default function TimelinePage() {
                 eventToEdit={editingEvent}
             />
         </div>
+    )
+}
+
+export default function TimelinePage() {
+    return (
+        <Suspense fallback={
+            <div className="h-full flex items-center justify-center">
+                <Loader2 className="w-8 h-8 animate-spin text-primary" />
+            </div>
+        }>
+            <TimelineContent />
+        </Suspense>
     )
 }
