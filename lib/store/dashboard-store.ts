@@ -18,12 +18,11 @@ interface DashboardState {
 }
 
 const DEFAULT_WIDGETS: DashboardWidget[] = [
-    { id: 'identity', label: 'Identity Card', visible: true, order: 0, size: 'large' },
-    { id: 'stats', label: 'Quick Stats', visible: true, order: 1, size: 'small' },
-    { id: 'recent-diary', label: 'Recent Diary', visible: true, order: 2, size: 'wide' },
-    { id: 'quick-actions', label: 'Quick Actions', visible: true, order: 3, size: 'small' },
-    { id: 'notes', label: 'Quick Notes', visible: true, order: 4, size: 'wide' },
-    { id: 'ai-chat', label: 'AI Assistant', visible: false, order: 5, size: 'wide' },
+    { id: 'id-card', label: 'ID Card', visible: true, order: 0, size: 'wide' },
+    { id: 'last-entries', label: 'Last Entries', visible: true, order: 1, size: 'wide' },
+    { id: 'quick-actions', label: 'Quick Actions', visible: true, order: 2, size: 'small' },
+    { id: 'notes', label: 'Quick Notes', visible: true, order: 3, size: 'wide' },
+    { id: 'ai-chat', label: 'AI Assistant', visible: false, order: 4, size: 'wide' },
 ]
 
 export const useDashboardStore = create<DashboardState>()(

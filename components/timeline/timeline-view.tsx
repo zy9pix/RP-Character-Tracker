@@ -8,15 +8,17 @@ import { Briefcase, Heart, Skull, Calendar } from "lucide-react"
 import { useCharacterStore } from "@/lib/store/character-store"
 import { Button } from "@/components/ui/core"
 import { Pencil, Trash2 } from "lucide-react"
+import { useI18n } from "@/lib/i18n-context"
 
 export function TimelineView({ events, onEdit }: { events: TimelineEvent[], onEdit: (event: TimelineEvent) => void }) {
     const { getActiveCharacter, deleteTimelineEvent } = useCharacterStore()
+    const { t } = useI18n()
     const activeChar = getActiveCharacter()
 
     if (!events || events.length === 0) {
         return (
             <div className="text-center py-12 text-muted-foreground border border-dashed border-border rounded-xl">
-                No timeline events recorded yet.
+                {t('timeline.no_events')}
             </div>
         )
     }
@@ -43,7 +45,7 @@ export function TimelineView({ events, onEdit }: { events: TimelineEvent[], onEd
 
     const handleDelete = (e: React.MouseEvent, eventId: string) => {
         e.stopPropagation()
-        if (confirm("Are you sure you want to delete this event?")) {
+        if (confirm(t('common.confirm_delete'))) {
             if (activeChar) {
                 deleteTimelineEvent(activeChar.id, eventId)
             }
@@ -64,10 +66,10 @@ export function TimelineView({ events, onEdit }: { events: TimelineEvent[], onEd
                     <div className={`absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full ring-4 ring-background ${getColor(event.type).replace('/10', '')} bg-background border-2 border-current`} />
 
                     <div className="bg-card border border-border p-4 rounded-xl hover:border-primary/50 transition-colors group relative">
-                        <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center justify-between mb-2 pr-20">
                             <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-xs font-medium border ${getColor(event.type)}`}>
                                 {getIcon(event.type)}
-                                {event.type.charAt(0).toUpperCase() + event.type.slice(1)}
+                                {t(`timeline.types.${event.type}`)}
                             </span>
                             <span className="text-xs text-muted-foreground font-mono">
                                 {format(new Date(event.date), "MMMM d, yyyy")}

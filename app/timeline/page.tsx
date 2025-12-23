@@ -8,9 +8,11 @@ import { Card, CardContent } from "@/components/ui/core"
 import { Plus, Loader2 } from "lucide-react"
 import { useState, useEffect, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
+import { useI18n } from "@/lib/i18n-context"
 
 function TimelineContent() {
     const { getActiveCharacter } = useCharacterStore()
+    const { t } = useI18n()
     const activeChar = getActiveCharacter()
     const searchParams = useSearchParams()
 
@@ -33,8 +35,8 @@ function TimelineContent() {
             <div className="flex h-full items-center justify-center p-8">
                 <Card className="max-w-md text-center bg-card/50">
                     <CardContent className="pt-6">
-                        <h2 className="text-xl font-bold mb-2">No Character Selected</h2>
-                        <p className="text-muted-foreground mb-4">Select a character to view their life events.</p>
+                        <h2 className="text-xl font-bold mb-2">{t('common.no_character')}</h2>
+                        <p className="text-muted-foreground mb-4">{t('common.select_character')}</p>
                     </CardContent>
                 </Card>
             </div>
@@ -45,12 +47,12 @@ function TimelineContent() {
         <div className="space-y-8 animate-in fade-in duration-500">
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-3xl font-bold tracking-tight">Timeline</h1>
-                    <p className="text-muted-foreground">Chronological history of {activeChar.name}</p>
+                    <h1 className="text-3xl font-bold tracking-tight">{t('timeline.title')}</h1>
+                    <p className="text-muted-foreground">{t('timeline.subtitle')} {activeChar.name}</p>
                 </div>
                 <Button onClick={() => { setEditingEvent(null); setShowCreate(true); }}>
                     <Plus className="w-4 h-4 mr-2" />
-                    Add Event
+                    {t('timeline.add_event')}
                 </Button>
             </div>
 

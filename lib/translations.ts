@@ -1,0 +1,290 @@
+export type Locale = 'en' | 'tr'
+
+export type TranslationKey = string
+
+export const translations = {
+    en: {
+        common: {
+            save: "Save",
+            cancel: "Cancel",
+            delete: "Delete",
+            edit: "Edit",
+            create: "Create",
+            created: "Created",
+            updated: "Updated",
+            copy: "Copy",
+            copied: "Copied to clipboard",
+            loading: "Loading...",
+            confirm_delete: "Are you sure you want to proceed?",
+            no_character: "No Character Selected",
+            select_character: "Select a character to continue.",
+        },
+        nav: {
+            dashboard: "Dashboard",
+            profile: "Profile",
+            diary: "Diary",
+            timeline: "Timeline",
+            settings: "Settings"
+        },
+        dashboard: {
+            title: "Dashboard",
+            customize: "Customize",
+            done_editing: "Done Editing",
+            widgets: {
+                id_card: "ID Card",
+                last_entries: "Last Entries",
+                quick_actions: "Quick Actions",
+                notes: "Quick Notes",
+                ai_chat: "AI Assistant"
+            },
+            id_card: {
+                occupation: "Occupation",
+                dob: "DOB",
+                signature: "Signature",
+                id_class: "ID Class",
+                location: "San Andreas",
+                unemployed: "Unemployed",
+                unknown: "UNKNOWN"
+            },
+            quick_actions: {
+                new_entry: "+ Entry",
+                new_event: "+ Event",
+                edit: "Edit"
+            },
+            quick_notes: {
+                placeholder: "Type scratch notes here..."
+            },
+            last_entries: {
+                no_entries: "No diary entries yet."
+            },
+            chat: {
+                title: "AI Chat",
+                clear: "Clear chat history?",
+                start: "Start a conversation with",
+                thinking: "Thinking...",
+                placeholder: "Message...",
+                send: "Send",
+                error: "Error: Could not connect to AI mind."
+            }
+        },
+        profile: {
+            title: "Profile",
+            edit_profile: "Edit Profile",
+            save_changes: "Save Changes",
+            id_info: "ID Information",
+            contact_info: "Contact & Financial",
+            background: "Background Story",
+            abilities: "Abilities & Skills",
+            traits: "Traits",
+            fields: {
+                name: "Full Legal Name",
+                dob: "Date of Birth",
+                pob: "Place of Birth",
+                job: "Occupation / Job",
+                family: "Family / Next of Kin",
+                address: "Residential Address",
+                phone: "Phone Number",
+                bank: "Bank Account Number",
+                story_placeholder: "Write your character's backstory here...",
+                no_story: "No backstory written yet."
+            },
+            traits_sections: {
+                personality: "Personality",
+                physical: "Physical"
+            }
+        },
+        timeline: {
+            title: "Timeline",
+            subtitle: "Chronological history of",
+            add_event: "Add Event",
+            save_event: "Save Event",
+            no_events: "No timeline events recorded yet.",
+            dialog: {
+                add_title: "Add Timeline Event",
+                edit_title: "Edit Timeline Event",
+                title_label: "Event Title",
+                date_label: "Date",
+                type_label: "Event Type",
+                summary_label: "Summary"
+            },
+            types: {
+                personal: "Personal",
+                business: "Business",
+                relationship: "Relationship",
+                crime: "Crime"
+            }
+        },
+        diary: {
+            title: "Diary",
+            new_entry: "New Entry",
+            search: "Search entries...",
+            no_entries: "No entries yet. Start writing!",
+            save: "Save",
+            generate: "Generate",
+            title_placeholder: "Entry Title...",
+            select_prompt: "Select an entry or create a new one."
+        },
+        settings: {
+            title: "Settings",
+            subtitle: "Configure your AI provider and application preferences.",
+            ai_layer: "AI Intelligence Layer",
+            api_key: "API Key",
+            api_key_desc: "Stored locally in your browser. Never sent to our servers.",
+            system_persona: "System Persona",
+            analyze_autofill: "Analyze & Auto-Fill",
+            analyze_desc: "This persona is unique to",
+            select_char_persona: "Select a character to customize persona",
+            data_management: "Data Management",
+            import: "Import Character",
+            import_desc: "Upload a JSON file (e.g., character backup) to import it into the tracker.",
+            export: "Export Character",
+            export_desc: "Download your character data as a JSON file for backup or transfer.",
+            click_upload: "Click to upload",
+            drag_drop: "or drag and drop",
+            language: "Language",
+            language_desc: "Select your preferred language."
+        }
+    },
+    tr: {
+        common: {
+            save: "Kaydet",
+            cancel: "İptal",
+            delete: "Sil",
+            edit: "Düzenle",
+            create: "Oluştur",
+            created: "Oluşturuldu",
+            updated: "Güncellendi",
+            copy: "Kopyala",
+            copied: "Panoya kopyalandı",
+            loading: "Yükleniyor...",
+            confirm_delete: "Devam etmek istediğinize emin misiniz?",
+            no_character: "Karakter Seçilmedi",
+            select_character: "Devam etmek için bir karakter seçin.",
+        },
+        nav: {
+            dashboard: "Kontrol Paneli",
+            profile: "Profil",
+            diary: "Günlük",
+            timeline: "Zaman Çizelgesi",
+            settings: "Ayarlar"
+        },
+        dashboard: {
+            title: "Kontrol Paneli",
+            customize: "Düzenle",
+            done_editing: "Düzenlemeyi Bitir",
+            widgets: {
+                id_card: "Kimlik Kartı",
+                last_entries: "Son Girdiler",
+                quick_actions: "Hızlı İşlemler",
+                notes: "Hızlı Notlar",
+                ai_chat: "Yapay Zeka"
+            },
+            id_card: {
+                occupation: "Meslek",
+                dob: "D. Tarihi",
+                signature: "İmza",
+                id_class: "Kimlik Sınıfı",
+                location: "San Andreas",
+                unemployed: "İşsiz",
+                unknown: "BİLİNMİYOR"
+            },
+            quick_actions: {
+                new_entry: "+ Girdi",
+                new_event: "+ Etkinlik",
+                edit: "Düzenle"
+            },
+            quick_notes: {
+                placeholder: "Notlarını buraya yaz..."
+            },
+            last_entries: {
+                no_entries: "Henüz günlük girdisi yok."
+            },
+            chat: {
+                title: "Yapay Zeka Sohbet",
+                clear: "Sohbet geçmişini temizle?",
+                start: "Şununla bir sohbet başlat:",
+                thinking: "Düşünüyor...",
+                placeholder: "Mesaj yaz...",
+                send: "Gönder",
+                error: "Hata: Yapay zeka zihni ile bağlantı kurulamadı."
+            }
+        },
+        profile: {
+            title: "Profil",
+            edit_profile: "Profili Düzenle",
+            save_changes: "Değişiklikleri Kaydet",
+            id_info: "Kimlik Bilgileri",
+            contact_info: "İletişim & Finans",
+            background: "Arkaplan Hikayesi",
+            abilities: "Yetenekler & Beceriler",
+            traits: "Özellikler",
+            fields: {
+                name: "Tam Yasal Ad",
+                dob: "Doğum Tarihi",
+                pob: "Doğum Yeri",
+                job: "Meslek / İş",
+                family: "Aile / Yakınlar",
+                address: "İkamet Adresi",
+                phone: "Telefon Numarası",
+                bank: "Banka Hesap Numarası",
+                story_placeholder: "Karakterinizin hikayesini buraya yazın...",
+                no_story: "Henüz bir hikaye yazılmamış."
+            },
+            traits_sections: {
+                personality: "Kişilik",
+                physical: "Fiziksel"
+            }
+        },
+        timeline: {
+            title: "Zaman Çizelgesi",
+            subtitle: "Kronolojik geçmiş:",
+            add_event: "Etkinlik Ekle",
+            save_event: "Kaydet",
+            no_events: "Henüz kaydedilmiş bir etkinlik yok.",
+            dialog: {
+                add_title: "Zaman Çizelgesi Etkinliği Ekle",
+                edit_title: "Etkinliği Düzenle",
+                title_label: "Etkinlik Başlığı",
+                date_label: "Tarih",
+                type_label: "Etkinlik Türü",
+                summary_label: "Özet"
+            },
+            types: {
+                personal: "Kişisel",
+                business: "İş",
+                relationship: "İlişki",
+                crime: "Suç"
+            }
+        },
+        diary: {
+            title: "Günlük",
+            new_entry: "Yeni Girdi",
+            search: "Girdilerde ara...",
+            no_entries: "Henüz girdi yok. Yazmaya başla!",
+            save: "Kaydet",
+            generate: "Oluştur",
+            title_placeholder: "Girdi Başlığı...",
+            select_prompt: "Bir girdi seçin veya yeni bir tane oluşturun."
+        },
+        settings: {
+            title: "Ayarlar",
+            subtitle: "Yapay zeka sağlayıcınızı ve uygulama tercihlerinizi yapılandırın.",
+            ai_layer: "Yapay Zeka Katmanı",
+            api_key: "API Anahtarı",
+            api_key_desc: "Tarayıcınızda yerel olarak saklanır. Sunucularımıza asla gönderilmez.",
+            system_persona: "Sistem Personası",
+            analyze_autofill: "Analiz Et & Doldur",
+            analyze_desc: "Bu persona şuna özeldir:",
+            select_char_persona: "Persona özelleştirmek için karakter seçin",
+            data_management: "Veri Yönetimi",
+            import: "Karakter İçe Aktar",
+            import_desc: "Takipçiye aktarmak için bir JSON dosyası (örn. yedek) yükleyin.",
+            export: "Karakter Dışa Aktar",
+            export_desc: "Yedekleme veya aktarım için karakter verilerinizi JSON olarak indirin.",
+            click_upload: "Yüklemek için tıkla",
+            drag_drop: "veya sürükleyip bırak",
+            language: "Dil",
+            language_desc: "Tercih ettiğiniz dili seçin."
+        }
+    }
+}

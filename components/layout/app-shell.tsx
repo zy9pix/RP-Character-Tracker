@@ -6,16 +6,18 @@ import { LayoutDashboard, Book, Settings, User, Calendar, Menu, X } from 'lucide
 import { cn } from '@/lib/utils'
 import { CharacterSwitcher } from '@/components/features/character-switcher'
 import { useState } from 'react'
+import { useI18n } from '@/lib/i18n-context'
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
+    const { t } = useI18n()
     const pathname = usePathname()
 
     const navItems = [
-        { href: '/', label: 'Overview', icon: LayoutDashboard },
-        { href: '/profile', label: 'Profile', icon: User },
-        { href: '/diary', label: 'Diary', icon: Book },
-        { href: '/timeline', label: 'Timeline', icon: Calendar },
-        { href: '/settings', label: 'Settings', icon: Settings },
+        { href: '/', label: t('nav.dashboard'), icon: LayoutDashboard },
+        { href: '/profile', label: t('nav.profile'), icon: User },
+        { href: '/diary', label: t('nav.diary'), icon: Book },
+        { href: '/timeline', label: t('nav.timeline'), icon: Calendar },
+        { href: '/settings', label: t('nav.settings'), icon: Settings },
     ]
 
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)

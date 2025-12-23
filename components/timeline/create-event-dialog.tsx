@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { useCharacterStore } from "@/lib/store/character-store"
+import { useI18n } from "@/lib/i18n-context"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, Button, Input, Label, Textarea, Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/core"
 import { v4 as uuidv4 } from 'uuid'
 import { Calendar } from "lucide-react"
@@ -7,6 +8,7 @@ import { TimelineEvent } from "@/lib/types"
 
 export function CreateEventDialog({ open, onOpenChange, eventToEdit }: { open: boolean, onOpenChange: (open: boolean) => void, eventToEdit?: TimelineEvent | null }) {
     const { getActiveCharacter, updateCharacter, updateTimelineEvent } = useCharacterStore()
+    const { t } = useI18n()
     const activeChar = getActiveCharacter()
 
     const [title, setTitle] = useState("")
@@ -33,29 +35,15 @@ export function CreateEventDialog({ open, onOpenChange, eventToEdit }: { open: b
         e.preventDefault()
         if (!activeChar) return
 
-        if (eventToEdit) {
-            // Update
-            updateTimelineEvent(activeChar.id, {
-                id: eventToEdit.id,
-                title,
-                date,
-                type,
-                summary
-            })
-        } else {
-            // Create
-            const newEvent: TimelineEvent = {
-                id: uuidv4(),
-                title,
-                date,
-                type,
-                summary
-            }
-            const currentEvents = activeChar.timeline || []
-            updateCharacter(activeChar.id, {
-                timeline: [...currentEvents, newEvent]
-            })
+        const eventData: TimelineEvent = {
+            id: eventToEdit ? eventToEdit.id : uuidv4(),
+            title,
+            date,
+            type,
+            summary
         }
+
+        updateTimelineEvent(activeChar.id, eventData)
 
         onOpenChange(false)
     }
@@ -64,11 +52,11 @@ export function CreateEventDialog({ open, onOpenChange, eventToEdit }: { open: b
         <Dialog open={open} onOpenChange={onOpenChange}>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                    <DialogTitle>{eventToEdit ? "Edit Timeline Event" : "Add Timeline Event"}</DialogTitle>
+                    <DialogTitle>{eventToEdit ? t('timeline.dialog.edit_title') : t('timeline.dialog.add_title')}</DialogTitle>
                 </DialogHeader>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="space-y-2">
-                        <Label>Event Title</Label>
+                        <Label>{t('timeline.dialog.title_label')}</Label>
                         <Input
                             placeholder="e.g. Moved to Los Santos"
                             value={title}
@@ -78,7 +66,7 @@ export function CreateEventDialog({ open, onOpenChange, eventToEdit }: { open: b
                     </div>
 
                     <div className="space-y-2">
-                        <Label>Date</Label>
+                        <Label>{t('timeline.dialog.date_label')}</Label>
                         <div className="relative">
                             <Input
                                 type="date"
@@ -92,22 +80,22 @@ export function CreateEventDialog({ open, onOpenChange, eventToEdit }: { open: b
                     </div>
 
                     <div className="space-y-2">
-                        <Label>Event Type</Label>
+                        <Label>{t('timeline.dialog.type_label')}</Label>
                         <Select value={type} onValueChange={(val: any) => setType(val)}>
                             <SelectTrigger>
                                 <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="personal">Personal</SelectItem>
-                                <SelectItem value="business">Business</SelectItem>
-                                <SelectItem value="relationship">Relationship</SelectItem>
-                                <SelectItem value="crime">Crime</SelectItem>
+                                <SelectItem value="personal">{t('timeline.types.personal')}</SelectItem>
+                                <SelectItem value="business">{t('timeline.types.business')}</SelectItem>
+                                <SelectItem value="relationship">{t('timeline.types.relationship')}</SelectItem>
+                                <SelectItem value="crime">{t('timeline.types.crime')}</SelectItem>
                             </SelectContent>
                         </Select>
                     </div>
 
                     <div className="space-y-2">
-                        <Label>Summary</Label>
+                        <Label>{t('timeline.dialog.summary_label')}</Label>
                         <Textarea
                             placeholder="Brief description of the event..."
                             value={summary}
@@ -117,7 +105,7 @@ export function CreateEventDialog({ open, onOpenChange, eventToEdit }: { open: b
                     </div>
 
                     <DialogFooter>
-                        <Button type="submit">{eventToEdit ? "Save Changes" : "Add Event"}</Button>
+                        <Button type="submit">{eventToEdit ? t('timeline.save_event') : t('timeline.add_event')}</Button>
                     </DialogFooter>
                 </form>
             </DialogContent>

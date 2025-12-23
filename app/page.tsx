@@ -10,9 +10,11 @@ import { Button } from "@/components/ui/core"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 import { ChatWidget } from "@/components/dashboard/chat-widget"
+import { useI18n } from "@/lib/i18n-context"
 
 export default function Dashboard() {
   const { getActiveCharacter, updateCharacter } = useCharacterStore()
+  const { t } = useI18n()
   const activeChar = getActiveCharacter()
   const { widgets, toggleWidget, reorderWidgets, updateWidgetSize } = useDashboardStore()
 
@@ -40,73 +42,98 @@ export default function Dashboard() {
 
   const renderWidget = (id: string) => {
     switch (id) {
-      case 'identity':
+      case 'id-card':
         return (
-          <BentoCard className="h-full from-zinc-900 to-zinc-950 bg-gradient-to-br">
-            <div className="h-full flex flex-col justify-between">
-              <div>
-                <BentoTitle icon={User}>Identity</BentoTitle>
-                {activeChar && (
-                  <div className="mt-4">
-                    <h2 className="text-3xl font-bold tracking-tight text-white">{activeChar.name}</h2>
-                    <p className="text-primary font-medium">{activeChar.role}</p>
-                    <div className="flex gap-2 mt-4 text-xs text-muted-foreground">
-                      <span className="bg-white/5 px-2 py-1 rounded border border-white/10 uppercase bg-zinc-900">{activeChar.gameType}</span>
-                      <span className="bg-white/5 px-2 py-1 rounded border border-white/10">{activeChar.gtaInfo?.origin || "Unknown Origin"}</span>
-                    </div>
+          <BentoCard className="h-full relative overflow-hidden group">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#1a1c23] to-[#121418] z-0" />
+
+            {/* ID Card Visual Background Elements */}
+            <div className="absolute top-0 left-0 w-full h-16 bg-[#2c2f38]/50 z-0" />
+            <div className="absolute bottom-4 right-4 w-24 h-24 rounded-full border-[10px] border-white/5 z-0" />
+
+            <div className="relative z-10 h-full flex flex-col justify-between p-1">
+              <div className="flex justify-between items-start">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded bg-zinc-800 border-2 border-white/10 overflow-hidden shrink-0">
+                    {activeChar?.avatarUrl ? (
+                      <img src={activeChar.avatarUrl} className="w-full h-full object-cover" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-xs font-bold text-muted-foreground">IMG</div>
+                    )}
                   </div>
-                )}
+                  <div>
+                    <div className="text-[10px] uppercase tracking-widest text-muted-foreground">{t('dashboard.id_card.location')}</div>
+                    <div className="text-lg font-bold leading-none">{activeChar?.name}</div>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <div className="text-[10px] uppercase text-muted-foreground">{t('dashboard.id_card.id_class')}</div>
+                  <div className="font-mono font-bold text-primary">A</div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4 mt-2">
+                <div>
+                  <div className="text-[9px] uppercase text-muted-foreground mb-0.5">{t('dashboard.id_card.occupation')}</div>
+                  <div className="text-sm font-medium truncate">{activeChar?.gtaInfo?.job || t('dashboard.id_card.unemployed')}</div>
+                </div>
+                <div>
+                  <div className="text-[9px] uppercase text-muted-foreground mb-0.5">{t('dashboard.id_card.dob')}</div>
+                  <div className="text-sm font-mono">{activeChar?.gtaInfo?.birthDate || t('dashboard.id_card.unknown')}</div>
+                </div>
+                <div className="col-span-2">
+                  <div className="text-[9px] uppercase text-muted-foreground mb-0.5">{t('dashboard.id_card.signature')}</div>
+                  <div className="text-xl font-handwriting opacity-75">{activeChar?.name}</div>
+                </div>
               </div>
             </div>
+
+            {/* Holographic overlay effect */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent bg-[length:200%_200%] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" style={{ backgroundPosition: '0% 0%' }} />
           </BentoCard>
         )
-      case 'stats':
+      case 'last-entries':
+        const w = widgets.find(w => w.id === 'last-entries')
+        const size = w?.size || 'wide'
+        let limit = 1
+        if (size === 'wide') limit = 2
+        if (size === 'large') limit = 4
+
+        const entries = (activeChar?.diary || [])
+          .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+          .slice(0, limit)
+
         return (
           <BentoCard className="h-full">
-            <BentoTitle icon={Wallet}>Finances</BentoTitle>
-            {activeChar && (
-              <div className="mt-2 space-y-1">
-                <div className="flex justify-between items-baseline">
-                  <span className="text-sm text-muted-foreground">Cash</span>
-                  <span className="text-xl font-mono text-green-400">${activeChar.cash.toLocaleString()}</span>
-                </div>
-                <div className="flex justify-between items-baseline">
-                  <span className="text-sm text-muted-foreground">Bank</span>
-                  <span className="text-xl font-mono text-blue-400">${activeChar.bank.toLocaleString()}</span>
-                </div>
-              </div>
-            )}
-          </BentoCard>
-        )
-      case 'recent-diary':
-        const recentEntry = activeChar?.diary?.[0]
-        return (
-          <BentoCard className="h-full">
-            <BentoTitle icon={History}>Latest Entry</BentoTitle>
-            {recentEntry ? (
-              <div className="mt-2 text-sm">
-                <div className="font-bold text-white truncate">{recentEntry.title}</div>
-                <div className="text-muted-foreground line-clamp-2 mt-1">{recentEntry.summary || recentEntry.content}</div>
-                <div className="text-xs text-zinc-500 mt-2">{new Date(recentEntry.date).toLocaleDateString()}</div>
-              </div>
-            ) : (
-              <div className="mt-2 text-sm text-muted-foreground italic">No diary entries yet.</div>
-            )}
+            <BentoTitle icon={History}>{t('dashboard.widgets.last_entries')}</BentoTitle>
+            <div className="mt-2 space-y-2">
+              {entries.length > 0 ? (
+                entries.map(entry => (
+                  <div key={entry.id} className="text-sm border-b border-white/5 pb-2 last:border-0">
+                    <div className="font-bold text-white truncate">{entry.title}</div>
+                    <div className="text-muted-foreground line-clamp-1 mt-0.5 text-xs">{entry.summary || entry.content}</div>
+                    <div className="text-[10px] text-zinc-500 mt-1">{new Date(entry.date).toLocaleDateString()}</div>
+                  </div>
+                ))
+              ) : (
+                <div className="text-sm text-muted-foreground italic">{t('dashboard.last_entries.no_entries')}</div>
+              )}
+            </div>
           </BentoCard>
         )
       case 'quick-actions':
         return (
           <BentoCard className="h-full">
-            <BentoTitle icon={Zap}>Quick Actions</BentoTitle>
+            <BentoTitle icon={Zap}>{t('dashboard.widgets.quick_actions')}</BentoTitle>
             <div className="grid grid-cols-2 gap-2 mt-4">
               <Link href="/diary?new=true" className="p-2 rounded bg-white/5 hover:bg-primary/20 hover:text-primary transition-colors text-xs font-medium text-center flex items-center justify-center">
-                + Entry
+                {t('dashboard.quick_actions.new_entry')}
               </Link>
               <Link href="/timeline?new=true" className="p-2 rounded bg-white/5 hover:bg-primary/20 hover:text-primary transition-colors text-xs font-medium text-center flex items-center justify-center">
-                + Event
+                {t('dashboard.quick_actions.new_event')}
               </Link>
-              <Link href="/profile" className="p-2 rounded bg-white/5 hover:bg-primary/20 hover:text-primary transition-colors text-xs font-medium text-center flex items-center justify-center">
-                Edit
+              <Link href="/profile?edit=true" className="p-2 rounded bg-white/5 hover:bg-primary/20 hover:text-primary transition-colors text-xs font-medium text-center flex items-center justify-center">
+                {t('dashboard.quick_actions.edit')}
               </Link>
             </div>
           </BentoCard>
@@ -128,7 +155,7 @@ export default function Dashboard() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+        <h1 className="text-3xl font-bold tracking-tight">{t('dashboard.title')}</h1>
         <Button
           variant="outline"
           size="sm"
@@ -136,7 +163,7 @@ export default function Dashboard() {
           className={isEditing ? "bg-primary/10 text-primary border-primary" : ""}
         >
           <Settings2 className="w-4 h-4 mr-2" />
-          {isEditing ? "Done Editing" : "Customize"}
+          {isEditing ? t('dashboard.done_editing') : t('dashboard.customize')}
         </Button>
       </div>
 
@@ -155,7 +182,7 @@ export default function Dashboard() {
                     : "bg-zinc-900 text-muted-foreground border-zinc-800 opacity-50 hover:opacity-100"
                 )}
               >
-                {w.label}
+                {t(`dashboard.widgets.${w.id.replace(/-/g, '_')}` as any)}
               </button>
             ))}
           </div>
@@ -263,6 +290,7 @@ export default function Dashboard() {
 }
 
 function QuickNotesWidget({ activeChar, updateCharacter }: { activeChar: any, updateCharacter: any }) {
+  const { t } = useI18n()
   const [note, setNote] = useState(activeChar?.quickNotes || "")
 
   // Sync local state when char changes
@@ -281,10 +309,10 @@ function QuickNotesWidget({ activeChar, updateCharacter }: { activeChar: any, up
 
   return (
     <BentoCard className="h-full">
-      <BentoTitle>Quick Notes</BentoTitle>
+      <BentoTitle>{t('dashboard.widgets.notes')}</BentoTitle>
       <textarea
         className="w-full h-full min-h-[5rem] mt-2 bg-transparent text-sm resize-none focus:outline-none text-muted-foreground p-1"
-        placeholder="Type scratch notes here..."
+        placeholder={t('dashboard.quick_notes.placeholder')}
         value={note}
         onChange={(e) => setNote(e.target.value)}
       />

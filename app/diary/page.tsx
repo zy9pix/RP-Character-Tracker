@@ -11,10 +11,12 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { format } from 'date-fns'
 import { toast } from "sonner"
 
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams, useRouter } from 'next/navigation'
+import { useI18n } from "@/lib/i18n-context"
 
 function DiaryContent() {
     const { getActiveCharacter, addDiaryEntry, updateDiaryEntry, deleteDiaryEntry } = useCharacterStore()
+    const { t } = useI18n()
     const activeChar = getActiveCharacter()
     const searchParams = useSearchParams()
 
@@ -22,26 +24,28 @@ function DiaryContent() {
     const [isCreating, setIsCreating] = useState(false)
     const [editTitle, setEditTitle] = useState('')
     const [editContent, setEditContent] = useState('')
+    const [editDate, setEditDate] = useState('')
     const [isMounted, setIsMounted] = useState(false)
     const [isGenerating, setIsGenerating] = useState(false)
+
+    const router = useRouter()
 
     useEffect(() => {
         setIsMounted(true)
         if (searchParams.get('new') === 'true') {
             handleCreateNew()
+            router.replace('/diary')
         }
     }, [searchParams])
-
-    if (!isMounted) return null
 
     if (!activeChar) {
         return (
             <div className="flex h-full items-center justify-center p-8">
                 <Card className="max-w-md text-center bg-card/50">
                     <CardContent className="pt-6">
-                        <h2 className="text-xl font-bold mb-2">No Character Selected</h2>
-                        <p className="text-muted-foreground mb-4">You need to create or select a character to access your diary.</p>
-                        <Button onClick={() => window.location.href = '/'}>Go to Dashboard</Button>
+                        <h2 className="text-xl font-bold mb-2">{t('common.no_character')}</h2>
+                        <p className="text-muted-foreground mb-4">{t('common.select_character')}</p>
+                        <Button onClick={() => window.location.href = '/'}>{t('common.no_character_button') || "Go to Dashboard"}</Button>
                     </CardContent>
                 </Card>
             </div>
@@ -57,7 +61,16 @@ function DiaryContent() {
         setIsCreating(true)
         setEditTitle('')
         setEditContent('')
+        setEditDate(new Date().toISOString().slice(0, 16)) // Default to now (YYYY-MM-DDTHH:mm)
     }
+
+    useEffect(() => {
+        setIsMounted(true)
+        if (searchParams.get('new') === 'true') {
+            handleCreateNew()
+            router.replace('/diary')
+        }
+    }, [searchParams])
 
     const handleSave = () => {
         if (!editTitle.trim()) return
@@ -66,16 +79,16 @@ function DiaryContent() {
             id: selectedEntryId || crypto.randomUUID(),
             title: editTitle,
             content: editContent,
-            date: selectedEntryId ? (activeChar.diary?.find(e => e.id === selectedEntryId)?.date || new Date().toISOString()) : new Date().toISOString(),
+            date: editDate ? new Date(editDate).toISOString() : new Date().toISOString(),
             tags: [],
         }
 
         if (selectedEntryId && !isCreating) {
             updateDiaryEntry(activeChar.id, newEntry)
-            toast.success("Diary entry updated")
+            toast.success(t('common.updated'))
         } else {
             addDiaryEntry(activeChar.id, newEntry)
-            toast.success("Diary entry created")
+            toast.success(t('common.created'))
         }
 
         setIsCreating(false)
@@ -87,11 +100,19 @@ function DiaryContent() {
         setIsCreating(false)
         setEditTitle(entry.title)
         setEditContent(entry.content)
+        // Convert ISO string to datetime-local format (YYYY-MM-DDTHH:mm)
+        // This handles timezones loosely, ideally use date-fns format
+        try {
+            const d = new Date(entry.date)
+            setEditDate(new Date(d.getTime() - (d.getTimezoneOffset() * 60000)).toISOString().slice(0, 16))
+        } catch (e) {
+            setEditDate(new Date().toISOString().slice(0, 16))
+        }
     }
 
     const handleDelete = (e: React.MouseEvent, entryId: string) => {
         e.stopPropagation()
-        if (confirm("Are you sure you wish to delete this entry?")) {
+        if (confirm(t('common.confirm_delete'))) {
             deleteDiaryEntry(activeChar.id, entryId)
             if (selectedEntryId === entryId) {
                 setSelectedEntryId(null)
@@ -152,16 +173,16 @@ function DiaryContent() {
             {/* Sidebar List */}
             <div className="w-1/3 flex flex-col gap-4">
                 <div className="flex justify-between items-center">
-                    <h2 className="text-2xl font-bold">Diary</h2>
+                    <h2 className="text-2xl font-bold">{t('diary.title')}</h2>
                     <Button size="sm" onClick={handleCreateNew}>
                         <Plus className="w-4 h-4 mr-2" />
-                        New Entry
+                        {t('diary.new_entry')}
                     </Button>
                 </div>
 
                 <div className="relative">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                    <Input placeholder="Search entries..." className="pl-9 bg-card/50" />
+                    <Input placeholder={t('diary.search')} className="pl-9 bg-card/50" />
                 </div>
 
                 <div className="flex-1 overflow-y-auto space-y-2 pr-2">
@@ -204,7 +225,7 @@ function DiaryContent() {
 
                     {sortedEntries.length === 0 && (
                         <div className="text-center p-8 text-muted-foreground border border-dashed border-border rounded-xl">
-                            No entries yet. Start writing!
+                            {t('diary.no_entries')}
                         </div>
                     )}
                 </div>
@@ -223,8 +244,15 @@ function DiaryContent() {
                             <Input
                                 value={editTitle}
                                 onChange={(e) => setEditTitle(e.target.value)}
-                                placeholder="Entry Title..."
+                                placeholder={t('diary.title_placeholder')}
                                 className="text-lg font-bold bg-transparent border-0 border-b border-border rounded-none px-0 focus-visible:ring-0 focus-visible:border-primary flex-1 mr-4"
+                            />
+                            {/* Date Picker */}
+                            <Input
+                                type="datetime-local"
+                                value={editDate}
+                                onChange={(e) => setEditDate(e.target.value)}
+                                className="w-auto bg-transparent border-0 border-b border-border rounded-none focus-visible:ring-0"
                             />
                             <div className="flex gap-2">
                                 <Button
@@ -234,11 +262,11 @@ function DiaryContent() {
                                     className="bg-primary/5 border-primary/20 hover:bg-primary/10 text-primary"
                                 >
                                     {isGenerating ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Sparkles className="w-4 h-4 mr-2" />}
-                                    Generate
+                                    {t('diary.generate')}
                                 </Button>
                                 <Button onClick={handleSave}>
                                     <Save className="w-4 h-4 mr-2" />
-                                    Save
+                                    {t('diary.save')}
                                 </Button>
                             </div>
                         </div>
@@ -252,7 +280,7 @@ function DiaryContent() {
                     </motion.div>
                 ) : (
                     <div className="h-full flex items-center justify-center text-muted-foreground border border-dashed border-border rounded-xl bg-card/20">
-                        Select an entry or create a new one.
+                        {t('diary.select_prompt')}
                     </div>
                 )}
             </div>
