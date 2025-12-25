@@ -145,13 +145,7 @@ function ProfileContent() {
                                     className="text-2xl font-bold font-sans"
                                     placeholder="Character Name"
                                 />
-                                <div className="flex gap-2">
-                                    <Input
-                                        value={formData.avatarUrl || ''}
-                                        onChange={(e) => setFormData({ ...formData, avatarUrl: e.target.value })}
-                                        className="text-xs"
-                                        placeholder="Avatar URL (https://...)"
-                                    />
+                                <div className="space-y-2">
                                     <Input
                                         value={formData.avatarUrl || ''}
                                         onChange={(e) => setFormData({ ...formData, avatarUrl: e.target.value })}
@@ -163,12 +157,6 @@ function ProfileContent() {
                         ) : (
                             <>
                                 <h1 className="text-4xl font-bold tracking-tight">{activeChar.name}</h1>
-                                <div className="flex items-center gap-2 text-muted-foreground">
-                                    <span className="px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-xs uppercase tracking-wider font-bold">
-                                        {activeChar.gameType}
-                                    </span>
-                                    <span>{activeChar.role}</span>
-                                </div>
                             </>
                         )}
                     </div>
@@ -336,7 +324,7 @@ function ProfileContent() {
                                         </div>
                                         <div className="space-y-1">
                                             <Label className="text-xs">{t('profile.fields.job')}</Label>
-                                            <Input value={formData.gtaInfo?.job || ""} onChange={(e) => updateGtaInfo('job', e.target.value)} />
+                                            <Input value={formData.role || ""} onChange={(e) => setFormData({ ...formData, role: e.target.value })} />
                                         </div>
                                         <div className="space-y-1">
                                             <Label className="text-xs">{t('profile.fields.family')}</Label>
@@ -355,7 +343,7 @@ function ProfileContent() {
                                         </div>
                                         <div>
                                             <span className="text-xs text-muted-foreground block">{t('profile.fields.job')}</span>
-                                            <span className="font-medium text-primary">{formData.gtaInfo?.job || "Unemployed"}</span>
+                                            <span className="font-medium">{formData.role || "Unemployed"}</span>
                                         </div>
                                         <div>
                                             <span className="text-xs text-muted-foreground block">{t('profile.fields.family')}</span>

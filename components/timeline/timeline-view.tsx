@@ -5,6 +5,7 @@ import { format } from "date-fns"
 import { motion } from "framer-motion"
 import { Briefcase, Heart, Skull, Calendar } from "lucide-react"
 
+import { useState } from "react"
 import { useCharacterStore } from "@/lib/store/character-store"
 import { Button } from "@/components/ui/core"
 import { Pencil, Trash2 } from "lucide-react"
@@ -15,6 +16,8 @@ export function TimelineView({ events, onEdit }: { events: TimelineEvent[], onEd
     const { t } = useI18n()
     const activeChar = getActiveCharacter()
 
+    const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc')
+
     if (!events || events.length === 0) {
         return (
             <div className="text-center py-12 text-muted-foreground border border-dashed border-border rounded-xl">
@@ -23,7 +26,11 @@ export function TimelineView({ events, onEdit }: { events: TimelineEvent[], onEd
         )
     }
 
-    const sortedEvents = [...events].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+    const sortedEvents = [...events].sort((a, b) => {
+        const dateA = new Date(a.date).getTime()
+        const dateB = new Date(b.date).getTime()
+        return sortOrder === 'asc' ? dateA - dateB : dateB - dateA
+    })
 
     const getIcon = (type: TimelineEvent['type']) => {
         switch (type) {
@@ -53,44 +60,57 @@ export function TimelineView({ events, onEdit }: { events: TimelineEvent[], onEd
     }
 
     return (
-        <div className="relative border-l border-border ml-4 space-y-8 py-4">
-            {sortedEvents.map((event, index) => (
-                <motion.div
-                    key={event.id}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    className="relative pl-8"
+        <div className="space-y-4">
+            <div className="flex justify-end">
+                <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc')}
+                    className="text-xs text-muted-foreground"
                 >
-                    {/* Dot */}
-                    <div className={`absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full ring-4 ring-background ${getColor(event.type).replace('/10', '')} bg-background border-2 border-current`} />
+                    {sortOrder === 'asc' ? t('common.sort_oldest') : t('common.sort_newest')}
+                </Button>
+            </div>
 
-                    <div className="bg-card border border-border p-4 rounded-xl hover:border-primary/50 transition-colors group relative">
-                        <div className="flex items-center justify-between mb-2 pr-20">
-                            <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-xs font-medium border ${getColor(event.type)}`}>
-                                {getIcon(event.type)}
-                                {t(`timeline.types.${event.type}`)}
-                            </span>
-                            <span className="text-xs text-muted-foreground font-mono">
-                                {format(new Date(event.date), "MMMM d, yyyy")}
-                            </span>
+            <div className="relative border-l border-border ml-4 space-y-8 py-4">
+                {sortedEvents.map((event, index) => (
+                    <motion.div
+                        key={event.id}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                        className="relative pl-8"
+                    >
+                        {/* Dot */}
+                        <div className={`absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full ring-4 ring-background ${getColor(event.type).replace('/10', '')} bg-background border-2 border-current`} />
+
+                        <div className="bg-card border border-border p-4 rounded-xl hover:border-primary/50 transition-colors group relative">
+                            <div className="flex items-center justify-between mb-2 pr-20">
+                                <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-xs font-medium border ${getColor(event.type)}`}>
+                                    {getIcon(event.type)}
+                                    {t(`timeline.types.${event.type}`)}
+                                </span>
+                                <span className="text-xs text-muted-foreground font-mono">
+                                    {format(new Date(event.date), "MMMM d, yyyy")}
+                                </span>
+                            </div>
+
+                            <h3 className="font-bold text-lg mb-1 group-hover:text-primary transition-colors pr-16">{event.title}</h3>
+                            <p className="text-muted-foreground text-sm">{event.summary}</p>
+
+                            {/* Actions */}
+                            <div className="absolute top-4 right-4 flex gap-1 z-10">
+                                <Button variant="ghost" size="icon" className="h-7 w-7 hover:bg-zinc-800" onClick={(e) => { e.stopPropagation(); onEdit(event); }}>
+                                    <Pencil className="w-3.5 h-3.5" />
+                                </Button>
+                                <Button variant="ghost" size="icon" className="h-7 w-7 text-red-500 hover:text-red-400 hover:bg-red-500/10" onClick={(e) => handleDelete(e, event.id)}>
+                                    <Trash2 className="w-3.5 h-3.5" />
+                                </Button>
+                            </div>
                         </div>
-
-                        <h3 className="font-bold text-lg mb-1 group-hover:text-primary transition-colors pr-16">{event.title}</h3>
-                        <p className="text-muted-foreground text-sm">{event.summary}</p>
-
-                        {/* Actions */}
-                        <div className="absolute top-4 right-4 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => onEdit(event)}>
-                                <Pencil className="w-3.5 h-3.5" />
-                            </Button>
-                            <Button variant="ghost" size="icon" className="h-7 w-7 text-red-500 hover:text-red-400 hover:bg-red-500/10" onClick={(e) => handleDelete(e, event.id)}>
-                                <Trash2 className="w-3.5 h-3.5" />
-                            </Button>
-                        </div>
-                    </div>
-                </motion.div>
-            ))}
+                    </motion.div>
+                ))}
+            </div>
         </div>
     )
 }

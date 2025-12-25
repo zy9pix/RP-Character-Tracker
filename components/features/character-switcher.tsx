@@ -1,14 +1,16 @@
 "use client"
 
 import { useCharacterStore } from "@/lib/store/character-store"
-import { ChevronDown, Plus, User } from "lucide-react"
+import { ChevronDown, Plus, User, Trash2 } from "lucide-react"
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { CreateCharacterDialog } from "./create-character-dialog"
+import { useI18n } from "@/lib/i18n-context"
 
 export function CharacterSwitcher() {
-    const { characters, getActiveCharacter, setActiveCharacter } = useCharacterStore()
+    const { characters, getActiveCharacter, setActiveCharacter, deleteCharacter } = useCharacterStore()
+    const { t } = useI18n()
     const activeChar = getActiveCharacter()
     const [isOpen, setIsOpen] = useState(false)
     const [showCreate, setShowCreate] = useState(false)
@@ -45,7 +47,7 @@ export function CharacterSwitcher() {
                         )}
                     </div>
                     <div className="flex-1 overflow-hidden hidden lg:block">
-                        <p className="text-sm font-bold truncate">{activeChar?.name || "Select Character"}</p>
+                        <p className="text-sm font-bold truncate">{activeChar?.name || t('common.select_character')}</p>
                         <p className="text-xs text-muted-foreground truncate">{activeChar?.role || "No active session"}</p>
                     </div>
                     <ChevronDown className="w-4 h-4 text-muted-foreground hidden lg:block" />
@@ -62,28 +64,41 @@ export function CharacterSwitcher() {
                                 className="absolute bottom-full mb-2 left-0 w-64 bg-card border border-border rounded-xl shadow-xl z-50 overflow-hidden"
                             >
                                 <div className="p-2 space-y-1">
-                                    <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground">My Characters</div>
+                                    <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground">{t('common.my_characters')}</div>
                                     {characters.map((char) => (
-                                        <button
-                                            key={char.id}
-                                            onClick={() => {
-                                                setActiveCharacter(char.id)
-                                                setIsOpen(false)
-                                            }}
-                                            className={cn(
-                                                "w-full flex items-center gap-2 px-2 py-2 rounded-md text-sm transition-colors",
-                                                activeChar?.id === char.id
-                                                    ? "bg-primary/10 text-primary"
-                                                    : "hover:bg-accent hover:text-accent-foreground"
-                                            )}
-                                        >
-                                            <div className="w-2 h-2 rounded-full bg-current" />
-                                            {char.name}
-                                        </button>
+                                        <div key={char.id} className="flex items-center gap-1 group/item">
+                                            <button
+                                                onClick={() => {
+                                                    setActiveCharacter(char.id)
+                                                    setIsOpen(false)
+                                                }}
+                                                className={cn(
+                                                    "flex-1 flex items-center gap-2 px-2 py-2 rounded-md text-sm transition-colors text-left",
+                                                    activeChar?.id === char.id
+                                                        ? "bg-primary/10 text-primary"
+                                                        : "hover:bg-accent hover:text-accent-foreground"
+                                                )}
+                                            >
+                                                <div className="w-2 h-2 rounded-full bg-current" />
+                                                {char.name}
+                                            </button>
+                                            <button
+                                                onClick={(e) => {
+                                                    e.stopPropagation()
+                                                    if (confirm(`${t('common.delete_char_confirm')} ${char.name}?`)) {
+                                                        deleteCharacter(char.id)
+                                                    }
+                                                }}
+                                                className="p-2 text-muted-foreground hover:text-red-500 hover:bg-red-500/10 rounded-md opacity-0 group-hover/item:opacity-100 transition-all"
+                                                title={t('common.delete')}
+                                            >
+                                                <Trash2 className="w-4 h-4" />
+                                            </button>
+                                        </div>
                                     ))}
 
                                     {characters.length === 0 && (
-                                        <div className="px-2 py-2 text-xs text-muted-foreground">No characters found.</div>
+                                        <div className="px-2 py-2 text-xs text-muted-foreground">{t('common.no_characters_found')}</div>
                                     )}
 
                                     <div className="h-px bg-border my-2" />
@@ -96,7 +111,7 @@ export function CharacterSwitcher() {
                                         className="w-full flex items-center gap-2 px-2 py-2 rounded-md text-sm hover:bg-primary/20 hover:text-primary transition-colors text-muted-foreground"
                                     >
                                         <Plus className="w-4 h-4" />
-                                        Create New Character
+                                        {t('common.create_new_character')}
                                     </button>
                                 </div>
                             </motion.div>

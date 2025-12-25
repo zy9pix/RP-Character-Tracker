@@ -151,7 +151,6 @@ export default function SettingsPage() {
                                                 const context = `
                                                 Name: ${activeChar.name}
                                                 Role: ${activeChar.role}
-                                                Origin: ${activeChar.gameType}
                                                 Story: ${activeChar.story}
                                                 
                                                 Stats: Cash $${activeChar.cash}, Bank $${activeChar.bank}
