@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import AppShell from "@/components/layout/app-shell";
 import RegisterPWA from "@/components/pwa-register";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -44,6 +45,7 @@ export default function RootLayout({
         </I18nProvider>
         <RegisterPWA />
         <Toaster />
+        <Analytics />
       </body>
     </html>
   );

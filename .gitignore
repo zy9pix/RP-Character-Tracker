@@ -39,3 +39,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# pwa
+/public/sw.js
+/public/workbox-*.js
+/public/worker-*.js
+
+# system
+Thumbs.db
+
+# ide
+.vscode
+.idea
