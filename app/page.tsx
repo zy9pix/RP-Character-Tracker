@@ -75,7 +75,7 @@ export default function Dashboard() {
               <div className="grid grid-cols-2 gap-4 mt-2">
                 <div>
                   <div className="text-[9px] uppercase text-muted-foreground mb-0.5">{t('dashboard.id_card.occupation')}</div>
-                  <div className="text-sm font-medium truncate">{activeChar?.gtaInfo?.job || t('dashboard.id_card.unemployed')}</div>
+                  <div className="text-sm font-medium truncate">{activeChar?.role || t('dashboard.id_card.unemployed')}</div>
                 </div>
                 <div>
                   <div className="text-[9px] uppercase text-muted-foreground mb-0.5">{t('dashboard.id_card.dob')}</div>

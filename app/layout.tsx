@@ -9,8 +9,8 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   metadataBase: new URL("http://localhost:3000"), // Set base URL for metadata resolution
-  title: "RP Character Tracker",
-  description: "Advanced tracker for your roleplay characters.",
+  title: "RoleBase",
+  description: "Advanced tracker and diary for your roleplay characters.",
   icons: {
     icon: '/icons/favicon.ico',
     shortcut: '/icons/favicon-16x16.png',
