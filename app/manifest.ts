@@ -2,9 +2,9 @@ import { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
     return {
-        name: 'RP Character Tracker',
-        short_name: 'RP Tracker',
-        description: 'Advanced tracker for your roleplay characters.',
+        name: 'RoleBase',
+        short_name: 'RoleBase',
+        description: 'Advanced tracker and diary for your roleplay characters.',
         start_url: '/',
         display: 'standalone',
         background_color: '#09090b',
