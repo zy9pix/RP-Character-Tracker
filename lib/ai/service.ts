@@ -4,6 +4,7 @@ export type GenerateContentParams = {
     systemPrompt?: string
     userPrompt: string
     model?: string
+    locale?: string
 }
 
 export class AIService {
@@ -29,7 +30,14 @@ export class AIService {
         const activeChar = useCharacterStore.getState().getActiveCharacter()
 
         // Priority: Param Override -> Character Persona -> Global Default
-        const systemPrompt = params.systemPrompt || activeChar?.systemPersona || settings.systemPrompt
+        let systemPrompt = params.systemPrompt || activeChar?.systemPersona || settings.systemPrompt
+
+        // Force language based on locale
+        if (params.locale === 'tr') {
+            systemPrompt = `IMPORTANT: Your primary language is Turkish. You MUST respond in Turkish unless explicitly asked to speak another language.\n\n${systemPrompt}`
+        } else if (params.locale === 'en') {
+            systemPrompt = `IMPORTANT: Your primary language is English. You MUST respond in English unless explicitly asked to speak another language.\n\n${systemPrompt}`
+        }
 
         try {
             return this.callGemini(apiKey, "gemini-2.5-flash", systemPrompt, params.userPrompt)

@@ -51,7 +51,8 @@ export function ChatWidget({ activeChar, updateCharacter }: ChatWidgetProps) {
             const responseText = await aiService.generateText({
                 systemPrompt: systemPrompt,
                 userPrompt: contextMsgs,
-                model: 'gemini-pro' // Default or use settings
+                model: 'gemini-pro', // Default or use settings
+                locale: t('locale_code') || 'en' // Get from translations or context
             })
 
             updateCharacter(activeChar.id, {

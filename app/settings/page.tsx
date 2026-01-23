@@ -175,7 +175,10 @@ export default function SettingsPage() {
                                                 ${context}
                                                 `
 
-                                                const result = await aiService.generateText({ userPrompt: prompt })
+                                                const result = await aiService.generateText({
+                                                    userPrompt: prompt,
+                                                    locale: t('locale_code') || 'en'
+                                                })
                                                 setCharacterPersona(result.trim())
                                                 toast.success("Persona generated!", { id: toastId })
                                             } catch (err: any) {

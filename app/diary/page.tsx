@@ -147,10 +147,12 @@ function DiaryContent() {
             ${recentEntries.map(e => `[${e.title}]: ${e.content.slice(0, 100)}...`).join('\n')}
             `
 
-            const prompt = `Write a diary entry for today based on the recent events. Maintain the character's voice.`
+            const prompt = t('diary.generate_prompt') || `Write a diary entry for today based on the recent events. Maintain the character's voice.`
+            const contextLabel = t('diary.context_label') || "Context"
 
             const generatedText = await aiService.generateText({
-                userPrompt: prompt + "\n\nContext:\n" + context
+                userPrompt: prompt + `\n\n${contextLabel}:\n` + context,
+                locale: t('locale_code') || 'en'
             })
 
             // If new, set title too maybe?

@@ -67,7 +67,7 @@ export function CreateCharacterDialog({ open, onOpenChange }: CreateCharacterDia
                     >
                         <Card className="bg-card border-border shadow-2xl">
                             <div className="flex items-center justify-between p-6 border-b border-border">
-                                <h2 className="text-xl font-bold">{t('common.create')} Character</h2>
+                                <h2 className="text-xl font-bold">{t('common.create')} {t('common.character')}</h2>
                                 <button onClick={() => onOpenChange(false)} className="text-muted-foreground hover:text-foreground">
                                     <X className="w-5 h-5" />
                                 </button>
@@ -80,7 +80,7 @@ export function CreateCharacterDialog({ open, onOpenChange }: CreateCharacterDia
                                         id="name"
                                         value={name}
                                         onChange={e => setName(e.target.value)}
-                                        placeholder="e.g. Hana Sterling"
+                                        placeholder={t('profile.fields.name_placeholder')}
                                         autoFocus
                                     />
                                 </div>

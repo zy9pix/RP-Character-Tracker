@@ -33,8 +33,8 @@ export default function Dashboard() {
     return (
       <div className="flex h-full items-center justify-center">
         <div className="text-center space-y-4">
-          <h1 className="text-3xl font-bold">Welcome to RP Tracker</h1>
-          <p className="text-muted-foreground">Please select or create a character to begin.</p>
+          <h1 className="text-3xl font-bold">{t('dashboard.welcome')}</h1>
+          <p className="text-muted-foreground">{t('dashboard.select_to_begin')}</p>
         </div>
       </div>
     )
@@ -187,7 +187,7 @@ export default function Dashboard() {
             ))}
           </div>
           <p className="text-xs text-muted-foreground mt-3">
-            Drag widgets to reorder. Use the size controls on each widget to resize.
+            {t('dashboard.editing_hint')}
           </p>
         </div>
       )}

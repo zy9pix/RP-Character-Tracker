@@ -9,9 +9,9 @@ export const translations = {
             cancel: "Cancel",
             delete: "Delete",
             edit: "Edit",
-            create: "Create",
             created: "Created",
             updated: "Updated",
+            locale_code: "en",
             copy: "Copy",
             copied: "Copied to clipboard",
             loading: "Loading...",
@@ -24,6 +24,7 @@ export const translations = {
             select_character: "Select a character to continue.",
             create_new_character: "Create New Character",
             my_characters: "My Characters",
+            character: "Character",
         },
         nav: {
             dashboard: "Dashboard",
@@ -34,8 +35,11 @@ export const translations = {
         },
         dashboard: {
             title: "Dashboard",
+            welcome: "Welcome to RoleBase",
+            select_to_begin: "Please select or create a character to begin.",
             customize: "Customize",
             done_editing: "Done Editing",
+            editing_hint: "Drag widgets to reorder. Use the size controls on each widget to resize.",
             widgets: {
                 id_card: "ID Card",
                 last_entries: "Last Entries",
@@ -84,6 +88,7 @@ export const translations = {
             traits: "Traits",
             fields: {
                 name: "Full Legal Name",
+                name_placeholder: "e.g. John Doe",
                 dob: "Date of Birth",
                 pob: "Place of Birth",
                 job: "Occupation / Job",
@@ -128,7 +133,9 @@ export const translations = {
             save: "Save",
             generate: "Generate",
             title_placeholder: "Entry Title...",
-            select_prompt: "Select an entry or create a new one."
+            select_prompt: "Select an entry or create a new one.",
+            generate_prompt: "Write a diary entry for today based on the recent events. Maintain the character's voice.",
+            context_label: "Context"
         },
         settings: {
             title: "Settings",
@@ -157,9 +164,9 @@ export const translations = {
             cancel: "İptal",
             delete: "Sil",
             edit: "Düzenle",
-            create: "Oluştur",
             created: "Oluşturuldu",
             updated: "Güncellendi",
+            locale_code: "tr",
             copy: "Kopyala",
             copied: "Panoya kopyalandı",
             loading: "Yükleniyor...",
@@ -172,6 +179,7 @@ export const translations = {
             select_character: "Devam etmek için bir karakter seçin.",
             create_new_character: "Yeni Karakter Oluştur",
             my_characters: "Karakterlerim",
+            character: "Karakter",
         },
         nav: {
             dashboard: "Kontrol Paneli",
@@ -182,8 +190,11 @@ export const translations = {
         },
         dashboard: {
             title: "Kontrol Paneli",
+            welcome: "RoleBase'e Hoş Geldiniz",
+            select_to_begin: "Devam etmek için lütfen bir karakter seçin veya oluşturun.",
             customize: "Düzenle",
             done_editing: "Düzenlemeyi Bitir",
+            editing_hint: "Widget'ları sürükleyerek yeniden sıralayın. Boyutlandırmak için her widget üzerindeki kontrolleri kullanın.",
             widgets: {
                 id_card: "Kimlik Kartı",
                 last_entries: "Son Girdiler",
@@ -232,6 +243,7 @@ export const translations = {
             traits: "Özellikler",
             fields: {
                 name: "Tam Yasal Ad",
+                name_placeholder: "örn. John Doe",
                 dob: "Doğum Tarihi",
                 pob: "Doğum Yeri",
                 job: "Meslek / İş",
@@ -276,7 +288,9 @@ export const translations = {
             save: "Kaydet",
             generate: "Oluştur",
             title_placeholder: "Girdi Başlığı...",
-            select_prompt: "Bir girdi seçin veya yeni bir tane oluşturun."
+            select_prompt: "Bir girdi seçin veya yeni bir tane oluşturun.",
+            generate_prompt: "Son olaylara dayanarak bugün için bir günlük girdisi yaz. Karakterin sesini ve kişiliğini koru.",
+            context_label: "Bağlam / Geçmiş"
         },
         settings: {
             title: "Ayarlar",

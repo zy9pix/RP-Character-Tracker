@@ -30,7 +30,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                     <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold text-xl">
                         R
                     </div>
-                    <span className="font-bold text-xl tracking-tighter">RP Tracker</span>
+                    <span className="font-bold text-xl tracking-tighter">RoleBase</span>
                 </div>
                 <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 text-muted-foreground hover:text-foreground">
                     {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -46,7 +46,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                     <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold text-xl">
                         R
                     </div>
-                    <span className="font-bold text-xl hidden lg:block tracking-tighter">RP Tracker</span>
+                    <span className="font-bold text-xl hidden lg:block tracking-tighter">RoleBase</span>
                 </div>
 
                 <nav className="flex-1 p-4 space-y-2">
